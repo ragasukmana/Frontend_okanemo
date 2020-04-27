@@ -1,34 +1,25 @@
 import React from 'react'
-import {
-    Badge
-} from 'react-bootstrap'
-import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Main extends React.Component {
+    componentDidMount(){
+        if (this.props.auth.data.token) {
+            this.props.history.push('/Home')
+        } else {
+            this.props.history.push('/Login')
+        }
+    }
     render() {
         return (
-            <div>
-                <h1>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h1>
-                <h2>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h2>
-                <h3>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h3>
-                <h4>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h4>
-                <h5>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h5>
-                <h6>
-                    Example heading <Badge variant="secondary">New</Badge>
-                </h6>
-            </div>
+            null
         )
     }
 }
 
-export default withRouter(Main)
+const mapStateToProps = state => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect (mapStateToProps)(Main)
